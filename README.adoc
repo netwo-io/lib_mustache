@@ -1,0 +1,24 @@
+===  Mustache template engine for PL/pgSQL
+
+==== Features
+
+- [x] variable unescaped `{{&name}}` and `{{{name}}}`
+- [x] variable escaped `{{name}}`
+- [ ] conditions
+- [ ] loop
+- [ ] contexts
+- [ ] sections
+    * [ ] list
+    * [ ] non-false values
+    * [ ] lambdas
+    * [ ] inverted
+- [ ] comments
+- [ ] partials
+
+=== Usage
+
+.render.sql
+[source,plpgsql]
+----
+include::./examples/render.sql[]
+----
