@@ -1,6 +1,6 @@
-===  Mustache template engine for PL/pgSQL
+==  Mustache template engine for PL/pgSQL
 
-==== Features
+=== Features
 
 - [x] variable unescaped `{{&name}}` and `{{{name}}}`
 - [x] variable escaped `{{name}}`
@@ -22,3 +22,9 @@
 ----
 include::./examples/render.sql[]
 ----
+
+=== API
+
+=== SQL Conventions
+
+Code is written https://github.com/fgribreau/sql-convention/[following standard SQL-convention].

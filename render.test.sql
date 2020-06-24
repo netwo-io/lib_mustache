@@ -2,11 +2,11 @@
 -- whole test suite generated from mustache.js
 --
 
-create or replace function test.test_case_lib_mustacheampersand_escape() returns void as
+create or replace function lib_test.test_case_lib_mustacheampersand_escape() returns void as
 $$
 declare
 begin
-    perform test.assertEqual(lib_mustache.render($_${{&message}}
+    perform lib_test.assert_equal(lib_mustache.render($_${{&message}}
 $_$, $_${
       "message": "Some <code>"
     }$_$::jsonb), $_$Some <code>
@@ -15,39 +15,39 @@ end;
 $$ language plpgsql;
 
 
--- create or replace function test.test_case_lib_mustacheapostrophe() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheapostrophe() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{apos}}{{control}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{apos}}{{control}}
 -- $_$, $_${"apos":"'","control":"X"}$_$::jsonb), $_$&#39;X
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachearray_of_strings() returns void as
+-- create or replace function lib_test.test_case_lib_mustachearray_of_strings() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#array_of_strings}}{{.}} {{/array_of_strings}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#array_of_strings}}{{.}} {{/array_of_strings}}
 -- $_$, $_${"array_of_strings":["hello","world"]}$_$::jsonb), $_$hello world
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheavoids_obj_prototype_in_view_cache() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheavoids_obj_prototype_in_view_cache() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{valueOf}} {{watch}}$_$, $_${"valueOf":"Avoids methods","watch":"in Object.prototype"}$_$::jsonb), $_$Avoids methods in Object.prototype$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_${{valueOf}} {{watch}}$_$, $_${"valueOf":"Avoids methods","watch":"in Object.prototype"}$_$::jsonb), $_$Avoids methods in Object.prototype$_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachebackslashes() returns void as
+-- create or replace function lib_test.test_case_lib_mustachebackslashes() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$* {{value}}
+--       perform lib_test.assert_equal(lib_mustache.render($_$* {{value}}
 -- * {{{value}}}
 -- * {{&value}}
 -- <script>
@@ -65,69 +65,69 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachebug_11_eating_whitespace() returns void as
+-- create or replace function lib_test.test_case_lib_mustachebug_11_eating_whitespace() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{tag}} foo
+--       perform lib_test.assert_equal(lib_mustache.render($_${{tag}} foo
 -- $_$, $_${"tag":"yo"}$_$::jsonb), $_$yo foo
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachebug_length_property() returns void as
+-- create or replace function lib_test.test_case_lib_mustachebug_length_property() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#length}}The length variable is: {{length}}{{/length}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#length}}The length variable is: {{length}}{{/length}}
 -- $_$, $_${"length":"hello"}$_$::jsonb), $_$The length variable is: hello
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachechanging_delimiters() returns void as
+-- create or replace function lib_test.test_case_lib_mustachechanging_delimiters() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{=<% %>=}}<% foo %> {{foo}} <%{bar}%> {{{bar}}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{=<% %>=}}<% foo %> {{foo}} <%{bar}%> {{{bar}}}
 -- $_$, $_${"foo":"foooooooooooooo","bar":"<b>bar!</b>"}$_$::jsonb), $_$foooooooooooooo {{foo}} <b>bar!</b> {{{bar}}}
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachecheck_falsy() returns void as
+-- create or replace function lib_test.test_case_lib_mustachecheck_falsy() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<p>{{#number}}0{{/number}}</p>
+--       perform lib_test.assert_equal(lib_mustache.render($_$<p>{{#number}}0{{/number}}</p>
 -- $_$, $_${}$_$::jsonb), $_$<p>0</p>
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachecli_js_view_with_function() returns void as
+-- create or replace function lib_test.test_case_lib_mustachecli_js_view_with_function() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#bold}}Hi {{name}}.{{/bold}}$_$, $_${"name":"Tater"}$_$::jsonb), $_$<b>Hi Tater.</b>$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#bold}}Hi {{name}}.{{/bold}}$_$, $_${"name":"Tater"}$_$::jsonb), $_$<b>Hi Tater.</b>$_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachecomments() returns void as
+-- create or replace function lib_test.test_case_lib_mustachecomments() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<h1>{{title}}{{! just something interesting... or not... }}</h1>
+--       perform lib_test.assert_equal(lib_mustache.render($_$<h1>{{title}}{{! just something interesting... or not... }}</h1>
 -- $_$, $_${}$_$::jsonb), $_$<h1>A Comedy of Errors</h1>
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachecomplex() returns void as
+-- create or replace function lib_test.test_case_lib_mustachecomplex() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<h1>{{header}}</h1>
+--       perform lib_test.assert_equal(lib_mustache.render($_$<h1>{{header}}</h1>
 -- {{#list}}
 --   <ul>
 --   {{#item}}
@@ -153,21 +153,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachecontext_lookup() returns void as
+-- create or replace function lib_test.test_case_lib_mustachecontext_lookup() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#outer}}{{#second}}{{id}}{{/second}}{{/outer}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#outer}}{{#second}}{{id}}{{/second}}{{/outer}}
 -- $_$, $_${"outer":{"id":1,"second":{"nothing":2}}}$_$::jsonb), $_$1
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachedelimiters() returns void as
+-- create or replace function lib_test.test_case_lib_mustachedelimiters() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{=<% %>=}}*
+--       perform lib_test.assert_equal(lib_mustache.render($_${{=<% %>=}}*
 -- <% first %>
 -- * <% second %>
 -- <%=| |=%>
@@ -183,21 +183,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachedisappearing_whitespace() returns void as
+-- create or replace function lib_test.test_case_lib_mustachedisappearing_whitespace() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#bedrooms}}{{total}}{{/bedrooms}} BED
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#bedrooms}}{{total}}{{/bedrooms}} BED
 -- $_$, $_${"bedrooms":true,"total":1}$_$::jsonb), $_$1 BED
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachedot_notation() returns void as
+-- create or replace function lib_test.test_case_lib_mustachedot_notation() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<!-- exciting part -->
+--       perform lib_test.assert_equal(lib_mustache.render($_$<!-- exciting part -->
 -- <h1>{{name}}</h1>
 -- <p>Authors: <ul>{{#authors}}<li>{{.}}</li>{{/authors}}</ul></p>
 -- <p>Price: {{{price.currency.symbol}}}{{price.value}} {{#price.currency}}{{name}} <b>{{availability.text}}</b>{{/price.currency}}</p>
@@ -225,21 +225,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachedouble_render() returns void as
+-- create or replace function lib_test.test_case_lib_mustachedouble_render() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#foo}}{{bar}}{{/foo}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#foo}}{{bar}}{{/foo}}
 -- $_$, $_${"foo":true,"bar":"{{win}}","win":"FAIL"}$_$::jsonb), $_${{win}}
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheempty_list() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheempty_list() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$These are the jobs:
+--       perform lib_test.assert_equal(lib_mustache.render($_$These are the jobs:
 -- {{#jobs}}
 -- {{.}}
 -- {{/jobs}}
@@ -248,48 +248,48 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheempty_sections() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheempty_sections() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#foo}}{{/foo}}foo{{#bar}}{{/bar}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#foo}}{{/foo}}foo{{#bar}}{{/bar}}
 -- $_$, $_${}$_$::jsonb), $_$foo
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheempty_string() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheempty_string() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{description}}{{#child}}{{description}}{{/child}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{description}}{{#child}}{{description}}{{/child}}
 -- $_$, $_${"description":"That is all!","child":{"description":""}}$_$::jsonb), $_$That is all!
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheempty_template() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheempty_template() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<html><head></head><body><h1>Test</h1></body></html>$_$, $_${}$_$::jsonb), $_$<html><head></head><body><h1>Test</h1></body></html>$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_$<html><head></head><body><h1>Test</h1></body></html>$_$, $_${}$_$::jsonb), $_$<html><head></head><body><h1>Test</h1></body></html>$_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheerror_not_found() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheerror_not_found() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{foo}}$_$, $_${"bar":2}$_$::jsonb), '');
+--       perform lib_test.assert_equal(lib_mustache.render($_${{foo}}$_$, $_${"bar":2}$_$::jsonb), '');
 --     end;
 --     $$ language plpgsql;
 --
-create or replace function test.test_case_lib_mustacheescaped() returns void as
+create or replace function lib_test.test_case_lib_mustacheescaped() returns void as
     -- edited because we won't support function inside json
 $$
 declare
 begin
-    perform test.assertEqual(lib_mustache.render($_$<h1>{{title}}{{symbol}}</h1>
+    perform lib_test.assert_equal(lib_mustache.render($_$<h1>{{title}}{{symbol}}</h1>
 And even {{entities}}, but not {{{entities}}}.
 $_$, $_${
       "title": "Bear > Shark",
@@ -302,11 +302,11 @@ end;
 $$ language plpgsql;
 
 --
--- create or replace function test.test_case_lib_mustachefalsy() returns void as
+-- create or replace function lib_test.test_case_lib_mustachefalsy() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#emptyString}}empty string{{/emptyString}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#emptyString}}empty string{{/emptyString}}
 -- {{^emptyString}}inverted empty string{{/emptyString}}
 -- {{#emptyArray}}empty array{{/emptyArray}}
 -- {{^emptyArray}}inverted empty array{{/emptyArray}}
@@ -334,11 +334,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachefalsy_array() returns void as
+-- create or replace function lib_test.test_case_lib_mustachefalsy_array() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#list}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#list}}
 -- {{#.}}{{#.}}{{.}}{{/.}}{{^.}}inverted {{/.}}{{/.}}
 -- {{/list}}$_$, $_${"list":[["","emptyString"],[[],"emptyArray"],[0,"zero"],[null,"null"],[null,"undefined"],[null,"NaN"]]}$_$::jsonb), $_$inverted emptyString
 -- inverted emptyArray
@@ -350,11 +350,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachegrandparent_context() returns void as
+-- create or replace function lib_test.test_case_lib_mustachegrandparent_context() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{grand_parent_id}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{grand_parent_id}}
 -- {{#parent_contexts}}
 -- {{grand_parent_id}}
 -- {{parent_id}}
@@ -385,21 +385,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachehigher_order_sections() returns void as
+-- create or replace function lib_test.test_case_lib_mustachehigher_order_sections() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#bolder}}Hi {{name}}.{{/bolder}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#bolder}}Hi {{name}}.{{/bolder}}
 -- $_$, $_${"name":"Tater","helper":"To tinker?"}$_$::jsonb), $_$Hi {{name}}. => <b>Hi Tater.</b> To tinker?
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheimplicit_iterator() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheimplicit_iterator() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{# data.author.twitter_id }}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{# data.author.twitter_id }}
 -- <meta name="twitter:site:id" content="{{.}}">
 -- {{/ data.author.twitter_id }}
 --
@@ -413,21 +413,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheincluded_tag() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheincluded_tag() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$You said "{{{html}}}" today
+--       perform lib_test.assert_equal(lib_mustache.render($_$You said "{{{html}}}" today
 -- $_$, $_${"html":"I like {{mustache}}"}$_$::jsonb), $_$You said "I like {{mustache}}" today
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheinverted_section() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheinverted_section() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#repos}}<b>{{name}}</b>{{/repos}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#repos}}<b>{{name}}</b>{{/repos}}
 -- {{^repos}}No repos :({{/repos}}
 -- {{^nothin}}Hello!{{/nothin}}
 -- $_$, $_${"repos":[]}$_$::jsonb), $_$
@@ -437,11 +437,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachekeys_with_questionmarks() returns void as
+-- create or replace function lib_test.test_case_lib_mustachekeys_with_questionmarks() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#person?}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#person?}}
 --   Hi {{name}}!
 -- {{/person?}}
 -- $_$, $_${"person?":{"name":"Jon"}}$_$::jsonb), $_$  Hi Jon!
@@ -449,11 +449,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachemalicious_template() returns void as
+-- create or replace function lib_test.test_case_lib_mustachemalicious_template() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{"+(function () {throw "evil"})()+"}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{"+(function () {throw "evil"})()+"}}
 -- {{{"+(function () {throw "evil"})()+"}}}
 -- {{> "+(function () {throw "evil"})()+"}}
 -- {{# "+(function () {throw "evil"})()+"}}
@@ -462,11 +462,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachemultiline_comment() returns void as
+-- create or replace function lib_test.test_case_lib_mustachemultiline_comment() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{!
+--       perform lib_test.assert_equal(lib_mustache.render($_${{!
 --
 -- This is a multi-line comment.
 --
@@ -477,39 +477,39 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenested_dot() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenested_dot() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#name}}Hello {{.}}{{/name}}$_$, $_${"name":"Bruno"}$_$::jsonb), $_$Hello Bruno$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#name}}Hello {{.}}{{/name}}$_$, $_${"name":"Bruno"}$_$::jsonb), $_$Hello Bruno$_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenested_higher_order_sections() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenested_higher_order_sections() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#bold}}{{#person}}My name is {{name}}!{{/person}}{{/bold}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#bold}}{{#person}}My name is {{name}}!{{/person}}{{/bold}}
 -- $_$, $_${"person":{"name":"Jonas"}}$_$::jsonb), $_$<b>My name is Jonas!</b>
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenested_iterating() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenested_iterating() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#inner}}{{foo}}{{#inner}}{{bar}}{{/inner}}{{/inner}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#inner}}{{foo}}{{#inner}}{{bar}}{{/inner}}{{/inner}}
 -- $_$, $_${"inner":[{"foo":"foo","inner":[{"bar":"bar"}]}]}$_$::jsonb), $_$foobar
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenesting() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenesting() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#foo}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#foo}}
 --   {{#a}}
 --     {{b}}
 --   {{/a}}
@@ -521,21 +521,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenesting_same_name() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenesting_same_name() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#items}}{{name}}{{#items}}{{.}}{{/items}}{{/items}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#items}}{{name}}{{#items}}{{.}}{{/items}}{{/items}}
 -- $_$, $_${"items":[{"name":"name","items":[1,2,3,4]}]}$_$::jsonb), $_$name1234
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenull_lookup_array() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenull_lookup_array() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#farray}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#farray}}
 -- {{#.}}{{#.}}{{.}} {{/.}}{{^.}}no twitter{{/.}}{{/.}}
 -- {{/farray}}
 -- $_$, $_${"name":"David","twitter":"@dasilvacontin","farray":[["Flor","@florrts"],["Miquel",null],["Chris",null]]}$_$::jsonb), $_$Flor @florrts
@@ -545,11 +545,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenull_lookup_object() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenull_lookup_object() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#fobject}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#fobject}}
 -- {{name}}'s twitter: {{#twitter}}{{.}}{{/twitter}}{{^twitter}}unknown{{/twitter}}.
 -- {{/fobject}}
 --
@@ -569,11 +569,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenull_string() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenull_string() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$Hello {{name}}
+--       perform lib_test.assert_equal(lib_mustache.render($_$Hello {{name}}
 -- glytch {{glytch}}
 -- binary {{binary}}
 -- value {{value}}
@@ -589,19 +589,19 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachenull_view() returns void as
+-- create or replace function lib_test.test_case_lib_mustachenull_view() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{name}}'s friends: {{#friends}}{{name}}, {{/friends}}$_$, $_${"name":"Joe","friends":null}$_$::jsonb), $_$Joe's friends:$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_${{name}}'s friends: {{#friends}}{{name}}, {{/friends}}$_$, $_${"name":"Joe","friends":null}$_$::jsonb), $_$Joe's friends:$_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacherecursion_with_same_names() returns void as
+-- create or replace function lib_test.test_case_lib_mustacherecursion_with_same_names() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{ name }}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{ name }}
 -- {{ description }}
 --
 -- {{#terms}}
@@ -619,11 +619,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachereuse_of_enumerables() returns void as
+-- create or replace function lib_test.test_case_lib_mustachereuse_of_enumerables() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#terms}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#terms}}
 --   {{name}}
 --   {{index}}
 -- {{/terms}}
@@ -643,11 +643,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachesection_as_context() returns void as
+-- create or replace function lib_test.test_case_lib_mustachesection_as_context() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#a_object}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#a_object}}
 --   <h1>{{title}}</h1>
 --   <p>{{description}}</p>
 --   <ul>
@@ -666,11 +666,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachesimple() returns void as
+-- create or replace function lib_test.test_case_lib_mustachesimple() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$Hello {{name}}
+--       perform lib_test.assert_equal(lib_mustache.render($_$Hello {{name}}
 -- You have just won ${{value}}!
 -- {{#in_ca}}
 -- Well, ${{ taxed_value }}, after taxes.
@@ -682,11 +682,11 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachestring_as_context() returns void as
+-- create or replace function lib_test.test_case_lib_mustachestring_as_context() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<ul>
+--       perform lib_test.assert_equal(lib_mustache.render($_$<ul>
 -- {{#a_list}}
 --   <li>{{a_string}}/{{.}}</li>
 -- {{/a_list}}
@@ -698,21 +698,21 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachetwo_in_a_row() returns void as
+-- create or replace function lib_test.test_case_lib_mustachetwo_in_a_row() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{greeting}}, {{name}}!
+--       perform lib_test.assert_equal(lib_mustache.render($_${{greeting}}, {{name}}!
 -- $_$, $_${"name":"Joe","greeting":"Welcome"}$_$::jsonb), $_$Welcome, Joe!
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustachetwo_sections() returns void as
+-- create or replace function lib_test.test_case_lib_mustachetwo_sections() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#foo}}
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#foo}}
 -- {{/foo}}
 -- {{#bar}}
 -- {{/bar}}
@@ -720,30 +720,30 @@ $$ language plpgsql;
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheunescaped() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheunescaped() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$<h1>{{{title}}}{{{symbol}}}</h1>
+--       perform lib_test.assert_equal(lib_mustache.render($_$<h1>{{{title}}}{{{symbol}}}</h1>
 -- $_$, $_${"symbol":null}$_$::jsonb), $_$<h1>Bear > Shark</h1>
 -- $_$);
 --     end;
 --     $$ language plpgsql;
 --
--- create or replace function test.test_case_lib_mustacheuses_props_from_view_prototype() returns void as
+-- create or replace function lib_test.test_case_lib_mustacheuses_props_from_view_prototype() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_$[{{ item.x }};{{ item.y }}]||{{#items}}[{{ a.x }};{{ a.y }} {{#a}}{{y}}{{/a}}]{{/items}}$_$, $_${"item":{"x":"0","_y":"00"},"items":[{"a":{"x":"1","_y":"2"}},{"a":{"x":"3","_y":"4"}}]}$_$::jsonb), $_$[0;00]||[1;2 2][3;4 4]$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_$[{{ item.x }};{{ item.y }}]||{{#items}}[{{ a.x }};{{ a.y }} {{#a}}{{y}}{{/a}}]{{/items}}$_$, $_${"item":{"x":"0","_y":"00"},"items":[{"a":{"x":"1","_y":"2"}},{"a":{"x":"3","_y":"4"}}]}$_$::jsonb), $_$[0;00]||[1;2 2][3;4 4]$_$);
 --     end;
 --     $$ language plpgsql;
 
 
-create or replace function test.test_case_lib_mustachewhitespace() returns void as
+create or replace function lib_test.test_case_lib_mustachewhitespace() returns void as
 $$
 declare
 begin
-    perform test.assertEqual(lib_mustache.render($_${{tag1}}
+    perform lib_test.assert_equal(lib_mustache.render($_${{tag1}}
 
 
 {{tag2}}.
@@ -759,10 +759,10 @@ end;
 $$ language plpgsql;
 
 --
--- create or replace function test.test_case_lib_mustachezero_view() returns void as
+-- create or replace function lib_test.test_case_lib_mustachezero_view() returns void as
 --     $$
 --     declare
 --     begin
---       perform test.assertEqual(lib_mustache.render($_${{#nums}}{{.}},{{/nums}}$_$, $_${"nums":[0,1,2]}$_$::jsonb), $_$0,1,2,$_$);
+--       perform lib_test.assert_equal(lib_mustache.render($_${{#nums}}{{.}},{{/nums}}$_$, $_${"nums":[0,1,2]}$_$::jsonb), $_$0,1,2,$_$);
 --     end;
 --     $$ language plpgsql;

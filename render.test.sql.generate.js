@@ -46,11 +46,11 @@ const tests_sql = Object.entries(tests)
   .filter(is_supported_test)
   .map(({test_name, txt, js, mustache}) => {
 
-    return `create or replace function test.test_case_lib_mustache${test_name}() returns void as
+    return `create or replace function lib_test.test_case_lib_mustache${test_name}() returns void as
     $$
     declare
     begin
-      perform test.assertEqual(lib_mustache.render(${escape(mustache)}, ${escape(js)}::jsonb), ${escape(txt)});
+      perform lib_test.assert_equal(lib_mustache.render(${escape(mustache)}, ${escape(js)}::jsonb), ${escape(txt)});
     end;
     $$ language plpgsql;
     `
